@@ -1,0 +1,9 @@
+<div class="px-3 py-2 bg-secondary text-white rounded">
+    @itemIndex. @itemText
+</div>
+
+
+@code {
+    [Parameter] public string? itemText {get; set;}
+    [Parameter] public int? itemIndex {get; set;}
+}

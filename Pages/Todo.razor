@@ -1,0 +1,35 @@
+@page "/todo"
+
+<PageTitle>Todo App</PageTitle>
+
+<h1> Awesome To-do App </h1>
+
+<div class="input-group my-3 w-50">
+  <input type="text" @bind="@taskInput" class="form-control" placeholder="What you gonna do?" aria-label="Task" aria-describedby="basic-addon2">
+  <button style="background: linear-gradient(to right, #2C5364, #203A43, #0F2027);" type="button" class="btn px-4 text-white" @onclick="addTask" >Add</button>
+</div>
+
+<div style="background: linear-gradient(to right, #2C5364, #203A43, #0F2027);" class="my-5 d-flex flex-column gap-3 bg-black p-3 rounded-3 w-50">
+    @if (tasks.Count == 0) {
+        <p class="text-danger my-auto font-weight-bold"><em>Oops your todo list is empty</em></p>
+    }
+    else {
+        <h2 class="text-white">To-do</h2>
+        @foreach (var (index, task) in tasks.Select((task, index) => (index+1, task)))
+        {
+            <ListItem itemText="@task" itemIndex="@index" />
+        }
+    }
+</div>
+
+@code {
+    public string? taskInput {get; set;}
+    private List<string> tasks = new List<string>();
+
+    private void addTask() {
+        if (string.IsNullOrWhiteSpace(taskInput)) {
+            return;
+        }
+        tasks.Add(taskInput);
+    }
+}
